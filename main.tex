@@ -120,20 +120,20 @@ The problem of Electronic Voting is one that is not limited to India, but a glob
 % {Basic Rules}
 
 \vspace{0.5cm}
-
+I survey the current voting system of Indian and I reconginse the potential concerns that need to be addressed before it can really be called a fool-proof system.
+\vspace{0.2cm}
 The following objectives are aimed to be discussed in this paper:
 \begin{itemize}
   \item
-  Defining the problem.
+  Problem Description
   % Support you design decisions ? 
+  \item
+  Current Voting system and it's safeguards 
   \item
   Desirable properties 
   % 9 SAK + 1 sankalan + others.
   \item
-  Technical and Political Aspects
-  % Tradeoffs ? Making strong both  
-  \item
-  Helpful Systems/Algorithms .
+  Helpful Systems/Algorithms 
   % RSA Cryptosystem & Blockchain
   \item
   Model  
@@ -141,12 +141,12 @@ The following objectives are aimed to be discussed in this paper:
   \item
   Correctness , scaling , feasibility and Implementation
   \item 
-  Epilogue
+  Epilogue/Conclusion
   % Closing the holes, who can we trust ? who will provide/manufacture the harware ? How will it be tested ?
   % How does it help ? What all is improved ? Other applications of this model ?
 \end{itemize}
 
-\chapter{Defining the problem}
+\chapter{Problem Description}
 \section{Introduction}
 
 India is a constitutional democracy with a parliamentary system of government, and at the heart of the system is a commitment to hold regular, free and fair elections. These elections determine the composition of the government, the membership of the two houses of parliament, the state and union territory legislative assemblies, and the Presidency and vice-presidency.
@@ -194,17 +194,17 @@ Electronic Voting Machines (EVMs) are being used instead of ballot boxes to prev
 Two Public Sector Undertakings(PSUs) deal with manufacturing of safety critical , sensitive equipment and therefore have stringent security protocols.
 \subsection{\textit{Secure} Design Features}
 \begin{itemize}
-  \item Standalone Machine : No wireless communication possible. \hyperref[sec:standalone]{Problems}
-  \item One time programmable Chip : No READ / WRITE possible after this being programmed. \hyperref[sec:otp]{Problems}
-  \item Clock : Real time clock (standalone) to timestamp the keypresses. \hyperref[sec:clock]{Problems}
-  \item Diagnostics : Automated self diagnostics introduced from 2013 M3 models . (But they are only as good as their components)
+  \item \textbf{Standalone Machine} : No wireless communication possible. \hyperref[sec:standalone]{Problems}
+  \item \textbf{One time programmable Chip} : No READ / WRITE possible after this being programmed. \hyperref[sec:otp]{Problems}
+  \item \textbf{Clock} : Real time clock (standalone) to timestamp the keypresses. \hyperref[sec:clock]{Problems}
+  \item \textbf{Diagnostics} : Automated self diagnostics introduced from 2013 M3 models . (But they are only as good as their components)
 \end{itemize}
 
 \subsection{\textit{Secure} Development process}
 \begin{itemize}
-  \item Contract : Software design and approved by TEC is never subcontracted. \hyperref[sec:contract]{Problems}
-  \item Software Validation : Carried out as per SRS by Independent Testing group. \hyperref[sec:contract]{Problems}
-  \item Surveillance : Entry and exit monitored by CCTV, electronic gadgets restricted. People frisked at checkpoints. Access Data and process data logging, alert generation during manufacture. Third party testing as per TEC quality standards. In the whole process the source code was only accesible to \textit{"Authorized Personnel"} \hyperref[sec:surv]{Problems}
+  \item \textbf{Contract} : Software design and approved by TEC is never subcontracted. \hyperref[sec:contract]{Problems}
+  \item \textbf{Software Validation} : Carried out as per SRS by Independent Testing group. \hyperref[sec:contract]{Problems}
+  \item \textbf{Surveillance} : Entry and exit monitored by CCTV, electronic gadgets restricted. People frisked at checkpoints. Access Data and process data logging, alert generation during manufacture. Third party testing as per TEC quality standards. In the whole process the source code was only accesible to \textit{"Authorized Personnel"} \hyperref[sec:surv]{Problems}
 \end{itemize}
 
 
@@ -213,20 +213,20 @@ Two Public Sector Undertakings(PSUs) deal with manufacturing of safety critical 
 These may \textit{possibly} prevent the many techincal flaws to be unearthed by attackers. But nevertheless they are only as good as the integrity of people enforcing these safeguards. That is to say , the techincal design model cannot sufficiently safeguard itself against tampering, vulnerabilities and other attacks.
 
 \begin{itemize}
-  \item  Stakeholder Participation : Participation of political parties and candidates in all processes. They try to not let other cadidates cheat.
-  \item  Allocation & Movement : EVM's allocated to poll going states by commision. \textit{Always} transported under 24/7 police escort.
-  \item  First Level Checking : 
+  \item \textbf{Stakeholder Participation} : Participation of political parties and candidates in all processes. They try to not let other cadidates cheat.
+  \item \textbf{Allocation & Movement} : EVM's allocated to poll going states by commision. \textit{Always} transported under 24/7 police escort.
+  \item \textbf{First Level Checking} : 
         \begin{enumerate}
           \item Complete Physical checkup (swithces, latches, functional test etc).
           \item Mock poll on all EVMs. Defective ones escored to manufacturer. Results of mock polls shared with representatives.
           \item CU sealed after FLC with pink paper seal. \textit{Which is inadequately secure against attacks} Signatures are not checked properly and can be forged after replacement of parts .
           \item Stored in Strong Rooms in 24/7 security. 
         \end{enumerate}
-  \item  Randomization : Twice randomized using EVM tracking software at the district and then at constituency level, then 3rd randomization of polling station officials. If implemented properly, effctive against preplanning/fixing of increasing counting to a particualar voter, becuase of randomizaion they won't know which candidate gets which slot.
-  \item  Mock Poll : Before the actual voting with 1000 votes. A testing procedure but by no means a security safeguard, as the malicious code can easily be instructed to run after a preset number of votes. 
-  \item  Poll Day Checks : By polling agents, CCTV, webcasting, observers and senior officers visiting, Media coverage
-  \item  Poll Closure & Transportation & Storage Security protocols : Close button on CU, EVMs sealed in carrying cases signed by polling agents. Transported back to reception centers under armed escort. Kept in strong room, observed by candidates, Double lock system, sealed rooms, and other security measures.  VVPAT's paper slips sealed in black envelopes with the EVM's.
-  \item  Counting Day Protocol : Strong room opend in presence of candidates, videography. ID's of CU's and signed seals are verified.
+  \item  \textbf{Randomization} : Twice randomized using EVM tracking software at the district and then at constituency level, then 3rd randomization of polling station officials. If implemented properly, effctive against preplanning/fixing of increasing counting to a particualar voter, becuase of randomizaion they won't know which candidate gets which slot.
+  \item  \textbf{Mock Poll} : Before the actual voting with 1000 votes. A testing procedure but by no means a security safeguard, as the malicious code can easily be instructed to run after a preset number of votes. 
+  \item  \textbf{Poll Day Checks} : By polling agents, CCTV, webcasting, observers and senior officers visiting, Media coverage
+  \item  \textbf{Poll Closure, Transportation and Storage Security protocols} : Close button on CU, EVMs sealed in carrying cases signed by polling agents. Transported back to reception centers under armed escort. Kept in strong room, observed by candidates, Double lock system, sealed rooms, and other security measures.  VVPAT's paper slips sealed in black envelopes with the EVM's.
+  \item  \textbf{Counting Day Protocol} : Strong room opend in presence of candidates, videography. ID's of CU's and signed seals are verified.
 \end{itemize}
 
 
@@ -274,16 +274,16 @@ We also discuss which properties are hard to implement, and with reasonable admi
 \section{Properties}
 Now let's formally list the ideally desirable properties of an Electronic Voting System.
 \begin{enumerate}
-  \item Coersion : Coersion freedom is when a candidate cannot force the voters to vote them and in any case shouldn't be able to forcibly see the candidate's vote. This is more of a social problem, and this will coflict with Verifiability of vote by self, because technically if you can correctly see your vote then, anyone can point a gun to your head and ask you to see what you voted for.  \\
+  \item \textbf{Coersion} : Coersion freedom is when a candidate cannot force the voters to vote them and in any case shouldn't be able to forcibly see the candidate's vote. This is more of a social problem, and this will coflict with Verifiability of vote by self, because technically if you can correctly see your vote then, anyone can point a gun to your head and ask you to see what you voted for.  \\
   So for practical systems, this property may be the first to go.
-  \item Secrecy : The design and modelling of the entire process should be open-source yet secure. Ex RSA Cryptosystem, the algorithm is well known yet resonably - unbreakable. This will also enable many more people to properly scrutnize and fix the voting process, as will it increase the number and knowledge of possible attackers. 
-  \item Non-Repudiation : Policies must be implemented which would prohibit, and won't allow a voter to pose as someone else and that should be verifiable ie a user who voted is the one who he clamis to be.
-  \item Veriafiable : The users who voted, must be counted to the correct cadidate, no switching of votes or wrong accumulation. It should also verify to be fair, un-baised and fair, ie each and every voter gets one vote only. 
-  \item Cryptographic : Data should be encrypted at each stage so any unauthenticated attacker cannot view the data (without the secure keys) even if the database is somehow leaked (worst case).
-  \item Audit : Proof of Correctness of entire voting process. And no one should be able to question it, as it should be reliable and veriafiable to that voter ie if someone comes, that prove to me my vote was casted to this particular party, the system should be able to give a proof of truthfullness / falsifyability of his statement.
-  \item Anonymity : My vote shouldn't be visible to anyone else, and should be correctly visible to me.
-  \item Self Certifiablity : The EVM's hardware, software and firmware should be self-certifiable. A proof of being tamper free and being correct.
-  \item Infomation Leakage : The model should have no sensitive information leakage .
+  \item \textbf{Secrecy} : The design and modelling of the entire process should be open-source yet secure. Ex RSA Cryptosystem, the algorithm is well known yet resonably - unbreakable. This will also enable many more people to properly scrutnize and fix the voting process, as will it increase the number and knowledge of possible attackers. 
+  \item \textbf{Non-Repudiation} : Policies must be implemented which would prohibit, and won't allow a voter to pose as someone else and that should be verifiable ie a user who voted is the one who he clamis to be.
+  \item \textbf{Veriafiable} : The users who voted, must be counted to the correct cadidate, no switching of votes or wrong accumulation. It should also verify to be fair, un-baised and fair, ie each and every voter gets one vote only. 
+  \item \textbf{Cryptographic} : Data should be encrypted at each stage so any unauthenticated attacker cannot view the data (without the secure keys) even if the database is somehow leaked (worst case).
+  \item \textbf{Audit} : Proof of Correctness of entire voting process. And no one should be able to question it, as it should be reliable and veriafiable to that voter ie if someone comes, that prove to me my vote was casted to this particular party, the system should be able to give a proof of truthfullness / falsifyability of his statement.
+  \item \textbf{Anonymity} : My vote shouldn't be visible to anyone else, and should be correctly visible to me.
+  \item \textbf{Self Certifiablity} : The EVM's hardware, software and firmware should be self-certifiable. A proof of being tamper free and being correct.
+  \item \textbf{Infomation Leakage} : The model should have no sensitive information leakage .
  \end{enumerate}
 
 % \chapter{Technical and Political Aspects}
@@ -293,19 +293,22 @@ Now let's formally list the ideally desirable properties of an Electronic Voting
 
 \chapter{Useful Systems}
 \section{RSA Cryptosystem}
-What is it ? Why is it secure ? Proof of it's security ? Why breaking it is infeasible ? Why does it work ? Basic level ? What are the current use cases ?
-Ex Wifi : Key is already in the air, but you can't reach it :) . WPA2 security 
+RSA is one of the first public-key cryptosystems and is widely used for secure data transmission. In such a cryptosystem, the encryption key is public and it is different from the decryption key which is kept secret (private). In RSA, this asymmetry is based on the practical difficulty of the factorization of the product of two large prime numbers, the "factoring problem". 
+\\
+A user of RSA creates and then publishes a public key based on two large prime numbers, along with an auxiliary value. The prime numbers must be kept secret. Anyone can use the public key to encrypt a message, but with currently published methods, and if the public key is large enough, only someone with knowledge of the prime numbers can decode the message feasibly.
 
 \section{Blockchain}
-What is it ? Why is it secure ? Proof of it's security ? Why breaking it is infeasible ? Why does it work ? Basic level ? What are the current use cases ?
-Ex : Bitcoin : How will it change the conventinal currency system, no central governing body and other advantages.
-
+A blockchain, originally block chain, is a continuously growing list of records, called blocks, which are linked and secured using cryptography. Each block typically contains a cryptographic hash of the previous block, a timestamp and transaction data. By design, a blockchain is inherently resistant to modification of the data. It is "an open, distributed ledger that can record transactions between two parties efficiently and in a verifiable and permanent way". For use as a distributed ledger, a blockchain is typically managed by a peer-to-peer network collectively adhering to a protocol for inter-node communication and validating new blocks. Once recorded, the data in any given block cannot be altered retroactively without the alteration of all subsequent blocks, which requires collusion of the network majority.
+\\
+Blockchains are secure by design and exemplify a distributed computing system with high Byzantine fault tolerance. Decentralized consensus has therefore been achieved with a blockchain. This makes blockchains potentially suitable for the recording of events, medical records, and other records management activities, such as identity management, transaction processing, documenting provenance, food traceability or \textbf{\textit{Voting}}.
+\\
+Blockchain was invented by Satoshi Nakamoto in 2008 for use in the cryptocurrency bitcoin, as its public transaction ledger. The invention of the blockchain for bitcoin made it the first digital currency to solve the double-spending problem without the need of a trusted authority or central server. The bitcoin design has been the inspiration for other applications.
 
 \chapter{Model}
-As I currently gather, the security and technical flaws in the EVM are being shadowed by the administrative safeguards. There may be a security flaw in the EVM's design, and it could theoritically be exploited, but the administrative safeguards make it impossible or very hard.
+As I currently gather, the security and technical flaws in the EVM are being shadowed and protected by the administrative safeguards. There may be a security flaw in the EVM's design, and it could theoritically be exploited, but the administrative safeguards make it impossible or very hard.
 
 The job the entire Technical Comitee (TEC) was to come up with a good EVM design, their design is far from perfect, some may even say sub-optimal. 
-But being a undergrad student with very limited time, I cannot hope to create an entierly new model which rivals that of current Indian EVM.
+But being a undergrad student with very limited time, I am not able to create an entierly new model which rivals that of current Indian EVM.
 
 \label{sec:addr}
 But these are the security vulnerabilities I would like to address :- 
@@ -315,49 +318,50 @@ But these are the security vulnerabilities I would like to address :-
   \item Cryptographic Storage
 \end{itemize}
 
-I went throught a novel system at Cornell called CIVITAS . Links : \href{https://www.cs.cornell.edu/projects/civitas/papers/clarkson_civitas.pdf}{1} and \href{https://www.cs.cornell.edu/~clarkson/papers/clarkson_civitas_tr.pdf}{2} .
+I also went through serveral existing government systems and theoritical systems online, one was a novel system at Cornell called CIVITAS . Links : \href{https://www.cs.cornell.edu/projects/civitas/papers/clarkson_civitas.pdf}{1} and \href{https://www.cs.cornell.edu/~clarkson/papers/clarkson_civitas_tr.pdf}{2} .
 
 \vspace{0.5cm}
 
 \\
-These papers contain detailed algorithms and their proofs, which when implemented will satisfy almost all of the properties listed above. It'll be secure, auditable, veriafiable, cryptographic, anonymous among other things.
+These papers contain detailed algorithms and their proofs, which when implemented will satisfy almost all of the \textit{desirable} properties listed above. It'll be secure, auditable, veriafiable, cryptographic, anonymous among other things.
 \\
 
 \vspace{0.5cm}
 
-But this model is not implementable in India, because it'll invole huge monetary and infrastructural resources, will require us to educate people how to use the new voting system. Taking into account the vast electorate and that many of the people in rural areas, simply don't have network connectivity and we then would have to make a simple enough hardware (yet secure enough) so the general populace can easily vote on the system. 
+But this model is not implementable in India, because it'll invole huge monetary and infrastructural resources, will require us to educate people how to use the new voting system. Taking into account the vast electorate and that many of the people in rural areas, simply don't have network connectivity and we then would have to make a simple enough hardware(yet secure enough) frontend so the general populace can easily vote on the system. 
+\\
 And by having network in the mix, we are introducing the model to a whole new plethora of problems.
 
 \section{Software Aspect}
 \section{Hardware Aspect}
 \section{Correctness}
-How many desirable properties does it satisfy ? How is it feasible for Implementation in the whole country ?
 \section{Scalability}
 \section{Implementational feasibility}
 
 
-% \chapter{Epilogue}
-% \section{What does it accomplish ?}
-% What changes does it bring in the Elections that weren't there previously ?
-% \section{Applications}
-% Where else can this system be applied ?
-% \section{Future Scope}
-
-
 \chapter{Conclusion}
-What does it accomplish ?
-What changes does it bring in the Elections that weren't there previously ?
-Applications 
-Where else can this system be applied ?
-Future Scope 
-What are some key learnings throught this excercize ? 
-That even thought algorithm is fully open source, no one can break it .
+By researching on this topic extensively, I can conclusively say :- 
+\\
+There is a diffence between coming up with an extremely good design with theoritically satisfies all the constraints but, it still may not be implementable in a country with as many challanges and barriers as India.
+% What does it accomplish ?
+% What changes does it bring in the Elections that weren't there previously ?
+% Applications 
+% Where else can this system be applied ?
+% Future Scope 
+% What are some key learnings throught this excercise ? 
+% That even thought algorithm is fully open source, no one can break it .
 
 \begin{thebibliography}{9}
-% \bibitem{ALM}
-% P. Allen, B. Landman and H. Meeks, New Bounds on van der Waerden type numbers for Generalized $3$-term Arithmetic Progressions, {\it arXiv: 1201.3842v2}
-% \bibitem{BL}
+\bibitem{ALM}
+\href{https://indiaevm.org/evm_tr2010-jul29.pdf}{Security Analysis of India’s Electronic Voting Machines} - Hari K. Prasad, J. Alex Halderman, Rop Gonggrijp% \bibitem{BL}
 % S. Burr and S. Loo, On Rado numbers II, unpublished.
+\bibitem{EIC}
+\href{http://eci.nic.in/eci_main1/current/StatusPaper-EVM.pdf}{Election Commision Website}
+\bibitem{BTC}
+\href{https://bitcoin.org/bitcoin.pdf}{Bitcoin paper} - Satoshi Nakamoto
+
+\bibitem{WIKI}
+Wikipedia articles on Indian Elections, RSA and Blockchain
 \end{thebibliography}
 
 \end{document}  
