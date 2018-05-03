@@ -222,12 +222,11 @@ These may \textit{possibly} prevent the many techincal flaws to be unearthed by 
           \item CU sealed after FLC with pink paper seal. \textit{Which is inadequately secure against attacks} Signatures are not checked properly and can be forged after replacement of parts .
           \item Stored in Strong Rooms in 24/7 security. 
         \end{enumerate}
-  \item  Randomization : Twice randomized using EVM tracking software. Effctive against preplanning of increasing count.
-  \item  Mock Poll
-  \item  Poll Day Checks
-  \item  Poll Closure & Transportation
-  \item  Storage & Security
-  \item  Counting Day Protocol
+  \item  Randomization : Twice randomized using EVM tracking software at the district and then at constituency level, then 3rd randomization of polling station officials. If implemented properly, effctive against preplanning/fixing of increasing counting to a particualar voter, becuase of randomizaion they won't know which candidate gets which slot.
+  \item  Mock Poll : Before the actual voting with 1000 votes. A testing procedure but by no means a security safeguard, as the malicious code can easily be instructed to run after a preset number of votes. 
+  \item  Poll Day Checks : By polling agents, CCTV, webcasting, observers and senior officers visiting, Media coverage
+  \item  Poll Closure & Transportation & Storage Security protocols : Close button on CU, EVMs sealed in carrying cases signed by polling agents. Transported back to reception centers under armed escort. Kept in strong room, observed by candidates, Double lock system, sealed rooms, and other security measures.  VVPAT's paper slips sealed in black envelopes with the EVM's.
+  \item  Counting Day Protocol : Strong room opend in presence of candidates, videography. ID's of CU's and signed seals are verified.
 \end{itemize}
 
 
@@ -256,30 +255,34 @@ Critical flaws/loopholes/debatable things in current model are :
   \label{sec:surv}
   \item Who are these \textit{"Authorized Personnel"} having access to the source code ? What is to happen when an attacker gets their hands on it ? That is why it'll be much better to keep the code open sourced and under scrutiny by everyone. 
 
+  \item Remote alteration of CU's display is possible if we replace some parts inside, like replace a display unit with a look alike, which has a IC with a wireless module inside it which intercepts the votes, keeps the vote count same and increases the count of a candidate which is remotly selected on a mobile device.
+  This attack was demostrated by Hari K Prasad, without any knowledge of source code. So it can be imagined that what vulnerabilities could be introduced by source code leakage.
+
+  \item Without the desing open-sourced, we have trust issues like are VVPAT's \textit{really} a secure way of authentically checking where the vote was cast ? And other problems in interconnections of various units of EVM like BUs CUs and VVPATs. 
+
+  \item Current EVMs are horrible at storing the data, they store it without any encryption in memory, that is horrendous and leads to information leakage, of the voters and maybe more security vulnerabilities.
 \end{itemize}
 
 
 \chapter{Desirable Properties}
 \section{Introduction}
 After review of the security vulnerabilities in the current EVM design, we reach upon the following conclusive and complete rules which should guide our EVM design.
-What should be some properties of an EVM ? And how should we decide them ?
-Certifiablity of hardware , software and firmware checks. Verifiability
+
+Things like Certifiablity of hardware , software and firmware checks are obviously needed, but here we look for more abstract level of properties.
+We also discuss which properties are hard to implement, and with reasonable administrative assumptions may be waived off. Because we may not be able to satisfy all the properties in a single design and there will be tradeoffs.
 
 \section{Properties}
-Now let's formally list the ideally desirable properties of Electronic Voting System.
+Now let's formally list the ideally desirable properties of an Electronic Voting System.
 \begin{enumerate}
-  \item Coersion - Freedom : What is it ? More of a Social vs Comp sc problem, will be the first to go when we go for feasible systems .
-  \item Secrecy : My vote shouldn't be visible to the public. Just who I voted to, but it should be counted (verifiably). 
-  ? As anonymouty is already a point, this point might be refering to design of the EVM itself, it should be open source and could be easily checked by anyone.
-  \item Non-Repudiation : 
-  \item Veriafiable : 
-  \item Cryptographic : (No one central authority should have access to the data?) (Blockchain kind of?)
-  \item Audit : 
-  \begin{itemize}
-    \item Proving there is no bias/unfairness . [Weightage of votes?] [1 person 1 vote]
-    \item Proof of Correctness of entire voting process .
-  \end{itemize}
+  \item Coersion : Coersion freedom is when a candidate cannot force the voters to vote them and in any case shouldn't be able to forcibly see the candidate's vote. This is more of a social problem, and this will coflict with Verifiability of vote by self, because technically if you can correctly see your vote then, anyone can point a gun to your head and ask you to see what you voted for.  \\
+  So for practical systems, this property may be the first to go.
+  \item Secrecy : The design and modelling of the entire process should be open-source yet secure. Ex RSA Cryptosystem, the algorithm is well known yet resonably - unbreakable. This will also enable many more people to properly scrutnize and fix the voting process, as will it increase the number and knowledge of possible attackers. 
+  \item Non-Repudiation : Policies must be implemented which would prohibit, and won't allow a voter to pose as someone else and that should be verifiable ie a user who voted is the one who he clamis to be.
+  \item Veriafiable : The users who voted, must be counted to the correct cadidate, no switching of votes or wrong accumulation. It should also verify to be fair, un-baised and fair, ie each and every voter gets one vote only. 
+  \item Cryptographic : Data should be encrypted at each stage so any unauthenticated attacker cannot view the data (without the secure keys) even if the database is somehow leaked (worst case).
+  \item Audit : Proof of Correctness of entire voting process .
   \item Anonymity : My vote shouldn't be visible to anyone else, and should be correctly visible to me .
+  My vote shouldn't be visible to the public. Just who I voted to, but it should be counted (verifiably). 
   \item Self Certifiablity : The EVM's hardware, software and firmware should be self-certifiable. [A prof of being tamper free and being correct]
   \item Infomation Leakage : The model should have no sensitive information leakage . But at the same time, if someone comes, that prove to me my vote was casted to this particular party, the system should be able to give a proof of truthfullness / falsifyability of his statement.
 \end{enumerate}
