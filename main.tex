@@ -176,11 +176,11 @@ Voting is by secret ballot. Polling stations are usually set up in public instit
 
 On entering the polling station, the elector is checked against the Electoral Roll, and allocated a ballot paper. The elector votes by marking the ballot paper with a rubber stamp on or near the symbol of the candidate of his choice, inside a screened compartment in the polling station. The voter then folds the ballot paper and inserts it in a common ballot box which is kept in full view of the Presiding Officer and polling agents of the candidates. This marking system eliminates the possibility of ballot papers being surreptitiously taken out of the polling station or not being put in the ballot box.
 
-\subsubsection{Before EVM's}
+\subsubsection{After EVM's}
 Electronic Voting Machines (EVMs) are being used instead of ballot boxes to prevent election fraud. After a citizen votes, his or her left index finger is marked with an indelible ink.  In 2003, all state elections and bye elections were held using EVMs. Encouraged by this the Commission took a historic decision to use only EVMs for the Lok Sabha election due in 2004. More than 1 million EVMs were used in this election.
 
 \chapter{Electronic Voting Machine}
-\textbf{Note} :- I surprisingly found very little details on technical build of EVM (because ideally it should be open source for anyone and everyone to verify and srutnize)[Why should we take the TEC for their promises ?] , whereas administrative arguments were quite prominently displayed. 
+\textbf{Note} :- I surprisingly found little details on technical build of EVM on the election commision's EVM \hyperref[http://eci.nic.in/eci_main1/evm1.aspx]{website} (because ideally it should be open source for anyone and everyone to verify and srutnize)[Why should we take the TEC for their promises ?], whereas administrative arguments are quite prominently displayed. 
 
 \section{Techincal Experts Comitee (TEC)}
 \begin{itemize}
@@ -244,7 +244,7 @@ Critical flaws/loopholes/debatable things in current model are :
   Ironically, the OTP doesn't allow the code to be read after burning, so we actually don't know if it actually contains the desired code, which is verified. It may constitute malicuous code for all we know, and may be triggered after say 1200 votes to bypass the mock poll criteria.
   The source code with is burned on chips is small(supposed to be security feature) and directly runs on the hardware. Because it is small, it can be reverse enginereed (that too in a matter of weeks) and this has been done by various labs for different chips. And they could then send a programmed chip \textit{almost} identical in function.
   Also, chip replacement (substitution by look alike chips) can be done anywhere and anytime in the process, well before the elections. Even the whole control unit can be replaced with identical looking units . This opens up a big window for tempation and fraudlent activity.
-  \item A simple I_{2}C interface is used in IC's and it is not stored cyrptographically in memory(EEPROM), so other IC's can be made which will intercepts the votes to the output (say the display unit) and directly compromise the authenticity and anonymity of votes.
+  \item A simple I2C interface is used in IC's and it is not stored cyrptographically in memory(EEPROM), so other IC's can be made which will intercept the votes to the output (say the display unit) and directly compromise the authenticity and anonymity of votes.
 
   \label{sec:clock}
   \item The clocks can be modified and substituted. And as each unit has a built-in self clock, they are not synchronized, which further enables any attacker to substitute or temporarily-shutdown the clock to do certain illegal keypresses which won't be time-logged.
@@ -262,7 +262,7 @@ Critical flaws/loopholes/debatable things in current model are :
 
   \item Current EVMs are horrible at storing the data, they store it without any encryption in memory, that is horrendous and leads to information leakage, of the voters and maybe more security vulnerabilities.
 \end{itemize}
-
+Some vulnerabilities can be addressed as \hyperref[sec:addr]{here}.
 
 \chapter{Desirable Properties}
 \section{Introduction}
@@ -280,17 +280,16 @@ Now let's formally list the ideally desirable properties of an Electronic Voting
   \item Non-Repudiation : Policies must be implemented which would prohibit, and won't allow a voter to pose as someone else and that should be verifiable ie a user who voted is the one who he clamis to be.
   \item Veriafiable : The users who voted, must be counted to the correct cadidate, no switching of votes or wrong accumulation. It should also verify to be fair, un-baised and fair, ie each and every voter gets one vote only. 
   \item Cryptographic : Data should be encrypted at each stage so any unauthenticated attacker cannot view the data (without the secure keys) even if the database is somehow leaked (worst case).
-  \item Audit : Proof of Correctness of entire voting process .
-  \item Anonymity : My vote shouldn't be visible to anyone else, and should be correctly visible to me .
-  My vote shouldn't be visible to the public. Just who I voted to, but it should be counted (verifiably). 
-  \item Self Certifiablity : The EVM's hardware, software and firmware should be self-certifiable. [A prof of being tamper free and being correct]
-  \item Infomation Leakage : The model should have no sensitive information leakage . But at the same time, if someone comes, that prove to me my vote was casted to this particular party, the system should be able to give a proof of truthfullness / falsifyability of his statement.
-\end{enumerate}
+  \item Audit : Proof of Correctness of entire voting process. And no one should be able to question it, as it should be reliable and veriafiable to that voter ie if someone comes, that prove to me my vote was casted to this particular party, the system should be able to give a proof of truthfullness / falsifyability of his statement.
+  \item Anonymity : My vote shouldn't be visible to anyone else, and should be correctly visible to me.
+  \item Self Certifiablity : The EVM's hardware, software and firmware should be self-certifiable. A proof of being tamper free and being correct.
+  \item Infomation Leakage : The model should have no sensitive information leakage .
+ \end{enumerate}
 
-\chapter{Technical and Political Aspects}
-Can a model like this really be implemented ? Who has the power to do this ? Who will conduct this ?
-Social aspects ? Proof at every step ?
-\section{Key Aspects}
+% \chapter{Technical and Political Aspects}
+% Can a model like this really be implemented ? Who has the power to do this ? Who will conduct this ?
+% Social aspects ? Proof at every step ?
+% \section{Key Aspects}
 
 \chapter{Useful Systems}
 \section{RSA Cryptosystem}
@@ -303,6 +302,31 @@ Ex : Bitcoin : How will it change the conventinal currency system, no central go
 
 
 \chapter{Model}
+As I currently gather, the security and technical flaws in the EVM are being shadowed by the administrative safeguards. There may be a security flaw in the EVM's design, and it could theoritically be exploited, but the administrative safeguards make it impossible or very hard.
+
+The job the entire Technical Comitee (TEC) was to come up with a good EVM design, their design is far from perfect, some may even say sub-optimal. 
+But being a undergrad student with very limited time, I cannot hope to create an entierly new model which rivals that of current Indian EVM.
+
+\label{sec:addr}
+But these are the security vulnerabilities I would like to address :- 
+\begin{itemize}
+  \item Open sourcing the design, iterating and fixing the flaws until it becomes secure enough
+  \item Manufacture of Chips in India, bring the change in necessary infrastructure so that atleast this type of chips can be manufactured in India itself.
+  \item Cryptographic Storage
+\end{itemize}
+
+I went throught a novel system at Cornell called CIVITAS . Links : \href{https://www.cs.cornell.edu/projects/civitas/papers/clarkson_civitas.pdf}{1} and \href{https://www.cs.cornell.edu/~clarkson/papers/clarkson_civitas_tr.pdf}{2} .
+
+\vspace{0.5cm}
+
+\\
+These papers contain detailed algorithms and their proofs, which when implemented will satisfy almost all of the properties listed above. It'll be secure, auditable, veriafiable, cryptographic, anonymous among other things.
+\\
+
+\vspace{0.5cm}
+
+But this model is not implementable in India, because it'll invole huge monetary and infrastructural resources, will require us to educate people how to use the new voting system. Taking into account the vast electorate and that many of the people in rural areas, simply don't have network connectivity and we then would have to make a simple enough hardware (yet secure enough) so the general populace can easily vote on the system. 
+And by having network in the mix, we are introducing the model to a whole new plethora of problems.
 
 \section{Software Aspect}
 \section{Hardware Aspect}
@@ -312,23 +336,29 @@ How many desirable properties does it satisfy ? How is it feasible for Implement
 \section{Implementational feasibility}
 
 
-\chapter{Epilogue}
-\section{What does it accomplish ?}
-What changes does it bring in the Elections that weren't there previously ?
-\section{Applications}
-Where else can this system be applied ?
-\section{Future Scope}
+% \chapter{Epilogue}
+% \section{What does it accomplish ?}
+% What changes does it bring in the Elections that weren't there previously ?
+% \section{Applications}
+% Where else can this system be applied ?
+% \section{Future Scope}
 
 
 \chapter{Conclusion}
-What are some key learnings throught this excercize ? That even thought algorithm is fully open source, no one can break it .
+What does it accomplish ?
+What changes does it bring in the Elections that weren't there previously ?
+Applications 
+Where else can this system be applied ?
+Future Scope 
+What are some key learnings throught this excercize ? 
+That even thought algorithm is fully open source, no one can break it .
 
-% \begin{thebibliography}{9}
+\begin{thebibliography}{9}
 % \bibitem{ALM}
 % P. Allen, B. Landman and H. Meeks, New Bounds on van der Waerden type numbers for Generalized $3$-term Arithmetic Progressions, {\it arXiv: 1201.3842v2}
 % \bibitem{BL}
 % S. Burr and S. Loo, On Rado numbers II, unpublished.
-% \end{thebibliography}
+\end{thebibliography}
 
 \end{document}  
 
