@@ -148,13 +148,123 @@ The following objectives are aimed to be discussed in this paper:
 
 \chapter{Defining the problem}
 \section{Introduction}
-\subsection{Why do we need a Voting system ?}
-\section{How do we Currently Vote ?}
+
+India is a constitutional democracy with a parliamentary system of government, and at the heart of the system is a commitment to hold regular, free and fair elections. These elections determine the composition of the government, the membership of the two houses of parliament, the state and union territory legislative assemblies, and the Presidency and vice-presidency.
+
+Elections are conducted according to the constitutional provisions, supplemented by laws made by Parliament. The major laws are Representation of the People Act, 1950, which mainly deals with the preparation and revision of electoral rolls, the Representation of the People Act, 1951 which deals, in detail, with all aspects of conduct of elections and post election disputes. The Supreme Court of India has held that where the enacted laws are silent or make insufficient provision to deal with a given situation in the conduct of elections, the Election Commission has the residuary powers under the Constitution to act in an appropriate manner. 
+
+The democratic system in India is based on the principle of universal adult suffrage; that any citizen over the age of 18 can vote in an election (before 1989 the age limit was 21). The right to vote is irrespective of caste, creed, religion or gender. Those who are deemed unsound of mind, and people convicted of certain criminal offences are not allowed to vote. 
+
+\section{Current Voting System of India}
+\subsection{Election Overview}
+
+Elections in India are events involving political mobilisation and organisational complexity on an amazing scale. In the 2004 election to Lok Sabha there were 1351 candidates from 6 National parties, 801 candidates from 36 State parties, 898 candidates fromofficially recognised parties and 2385 Independent candidates. A total number of 38,99,48,330 people voted out of total electorate size of 67,14,87,930. The Election Commission employed almost 4 million people to run the election. A vast number of civilian police and security forces were deployed to ensure that the elections were carried out peacefully.
+
+Conduct of General Elections in India for electing a new Lower House of Parliament (Lok Sabha) involves management of the largest event in the world. The electorate exceeds 670 million electors in about 700000 polling stations spread across widely varying geographic and climatic zones. Polling station
+
+Elections to the Lok Sabha are carried out using a first-past-the-post electoral system. The country is split up into separate geographical areas, known as constituencies, and the electors can cast one vote each for a candidate (although most candidates stand as independents, most successful candidates stand as members of political parties), the winner being the candidate who gets the maximum votes. 
+
+Candidates are required to file their nomination papers with the Electoral Commission. Then, a list of candidates is published. No party is allowed to use government resources for campaigning. No party is allowed to bribe the candidates before elections. The government cannot start a project during the election period. Campaigning ends at 6:00 pm on the second last day before the polling day.
+
+
+\subsection{How the voting takes place}
+
+The polling is held between 7:00 am and 6:00 pm. The Collector of each district is in charge of polling. Government employees are employed as poll officers at the polling stations. 
+
+\subsubsection{Before EVM's}
+Voting is by secret ballot. Polling stations are usually set up in public institutions, such as schools and community halls. To enable as many electors as possible to vote, the officials of the Election Commission try to ensure that there is a polling station within 2km of every voter, and that no polling stations should have to deal with more than 1500 voters. Each polling station is open for at least 8 hours on the day of the election.
+
+On entering the polling station, the elector is checked against the Electoral Roll, and allocated a ballot paper. The elector votes by marking the ballot paper with a rubber stamp on or near the symbol of the candidate of his choice, inside a screened compartment in the polling station. The voter then folds the ballot paper and inserts it in a common ballot box which is kept in full view of the Presiding Officer and polling agents of the candidates. This marking system eliminates the possibility of ballot papers being surreptitiously taken out of the polling station or not being put in the ballot box.
+
+\subsubsection{Before EVM's}
+Electronic Voting Machines (EVMs) are being used instead of ballot boxes to prevent election fraud. After a citizen votes, his or her left index finger is marked with an indelible ink.  In 2003, all state elections and bye elections were held using EVMs. Encouraged by this the Commission took a historic decision to use only EVMs for the Lok Sabha election due in 2004. More than 1 million EVMs were used in this election.
+
+\chapter{Electronic Voting Machine}
+\textbf{Note} :- I surprisingly found very little details on technical build of EVM (because ideally it should be open source for anyone and everyone to verify and srutnize)[Why should we take the TEC for their promises ?] , whereas administrative arguments were quite prominently displayed. 
+
+\section{Techincal Experts Comitee (TEC)}
+\begin{itemize}
+  \item Giving technical advice to build specs and newer vesions of EVM and VVPATs  before they goes into production.
+  \item Offers improvement in design and mentors companies in design and manufacturing process.
+  \item Do Independent Evaluation and System Verification of EVM's integrity and submit detailed reports to Election Commision.
+  \item Answers to the Election Commission about any queries like EVM's tamparibility that may be raised on EVM's design, manufacturing and processing.
+\end{itemize}
+
+\section{Manufacturing}
+Two Public Sector Undertakings(PSUs) deal with manufacturing of safety critical , sensitive equipment and therefore have stringent security protocols.
+\subsection{\textit{Secure} Design Features}
+\begin{itemize}
+  \item Standalone Machine : No wireless communication possible. \hyperref[sec:standalone]{Problems}
+  \item One time programmable Chip : No READ / WRITE possible after this being programmed. \hyperref[sec:otp]{Problems}
+  \item Clock : Real time clock (standalone) to timestamp the keypresses. \hyperref[sec:clock]{Problems}
+  \item Diagnostics : Automated self diagnostics introduced from 2013 M3 models . (But they are only as good as their components)
+\end{itemize}
+
+\subsection{\textit{Secure} Development process}
+\begin{itemize}
+  \item Contract : Software design and approved by TEC is never subcontracted. \hyperref[sec:contract]{Problems}
+  \item Software Validation : Carried out as per SRS by Independent Testing group. \hyperref[sec:contract]{Problems}
+  \item Surveillance : Entry and exit monitored by CCTV, electronic gadgets restricted. People frisked at checkpoints. Access Data and process data logging, alert generation during manufacture. Third party testing as per TEC quality standards. In the whole process the source code was only accesible to \textit{"Authorized Personnel"} \hyperref[sec:surv]{Problems}
+\end{itemize}
+
+
+
+\section{Administrative Safeguards}
+These may \textit{possibly} prevent the many techincal flaws to be unearthed by attackers. But nevertheless they are only as good as the integrity of people enforcing these safeguards. That is to say , the techincal design model cannot sufficiently safeguard itself against tampering, vulnerabilities and other attacks.
+
+\begin{itemize}
+  \item  Stakeholder Participation : Participation of political parties and candidates in all processes. They try to not let other cadidates cheat.
+  \item  Allocation & Movement : EVM's allocated to poll going states by commision. \textit{Always} transported under 24/7 police escort.
+  \item  First Level Checking : 
+        \begin{enumerate}
+          \item Complete Physical checkup (swithces, latches, functional test etc).
+          \item Mock poll on all EVMs. Defective ones escored to manufacturer. Results of mock polls shared with representatives.
+          \item CU sealed after FLC with pink paper seal. \textit{Which is inadequately secure against attacks} Signatures are not checked properly and can be forged after replacement of parts .
+          \item Stored in Strong Rooms in 24/7 security. 
+        \end{enumerate}
+  \item  Randomization : Twice randomized using EVM tracking software. Effctive against preplanning of increasing count.
+  \item  Mock Poll
+  \item  Poll Day Checks
+  \item  Poll Closure & Transportation
+  \item  Storage & Security
+  \item  Counting Day Protocol
+\end{itemize}
+
+
+
+
+\section{Problems in Current EVM design} 
+Critical flaws/loopholes/debatable things in current model are : 
+\begin{itemize}
+  \label{sec:standalone}
+  \item In other countries, there are EVM's which are fully connected to the network Ex. Netherlands . 
+  Because our EVM is closed, we(the public) cannot monitor in realtime what is actually going on inside. But every kepress is logged and timestamped. And we are to belive even that can't be tampered with .
+
+  \label{sec:otp}
+  \item We get the chips made from and outside contractors (Japan and America) because we don't have the technological infrastructure in India to manufacture the chips ourseleves.
+  Ironically, the OTP doesn't allow the code to be read after burning, so we actually don't know if it actually contains the desired code, which is verified. It may constitute malicuous code for all we know, and may be triggered after say 1200 votes to bypass the mock poll criteria.
+  The source code with is burned on chips is small(supposed to be security feature) and directly runs on the hardware. Because it is small, it can be reverse enginereed (that too in a matter of weeks) and this has been done by various labs for different chips. And they could then send a programmed chip \textit{almost} identical in function.
+  Also, chip replacement (substitution by look alike chips) can be done anywhere and anytime in the process, well before the elections. Even the whole control unit can be replaced with identical looking units . This opens up a big window for tempation and fraudlent activity.
+  \item A simple I_{2}C interface is used in IC's and it is not stored cyrptographically in memory(EEPROM), so other IC's can be made which will intercepts the votes to the output (say the display unit) and directly compromise the authenticity and anonymity of votes.
+
+  \label{sec:clock}
+  \item The clocks can be modified and substituted. And as each unit has a built-in self clock, they are not synchronized, which further enables any attacker to substitute or temporarily-shutdown the clock to do certain illegal keypresses which won't be time-logged.
+
+  \label{sec:contract}
+  \item Who is to say that the contractor, manufacturer and validator(independent testing unit) themselves aren't rigged ? They ideally should test on \textit{every} possible test case, which is impossible. That happens because they don't \textbf{\textit{prove}} the integrity of EVM model.
+
+  \label{sec:surv}
+  \item Who are these \textit{"Authorized Personnel"} having access to the source code ? What is to happen when an attacker gets their hands on it ? That is why it'll be much better to keep the code open sourced and under scrutiny by everyone. 
+
+\end{itemize}
+
 
 \chapter{Desirable Properties}
 \section{Introduction}
+After review of the security vulnerabilities in the current EVM design, we reach upon the following conclusive and complete rules which should guide our EVM design.
 What should be some properties of an EVM ? And how should we decide them ?
 Certifiablity of hardware , software and firmware checks. Verifiability
+
 \section{Properties}
 Now let's formally list the ideally desirable properties of Electronic Voting System.
 \begin{enumerate}
@@ -183,14 +293,16 @@ Social aspects ? Proof at every step ?
 \section{RSA Cryptosystem}
 What is it ? Why is it secure ? Proof of it's security ? Why breaking it is infeasible ? Why does it work ? Basic level ? What are the current use cases ?
 Ex Wifi : Key is already in the air, but you can't reach it :) . WPA2 security 
+
 \section{Blockchain}
 What is it ? Why is it secure ? Proof of it's security ? Why breaking it is infeasible ? Why does it work ? Basic level ? What are the current use cases ?
 Ex : Bitcoin : How will it change the conventinal currency system, no central governing body and other advantages.
 
 
 \chapter{Model}
-\section{Software Part}
-\section{Hardware Part}
+
+\section{Software Aspect}
+\section{Hardware Aspect}
 \section{Correctness}
 How many desirable properties does it satisfy ? How is it feasible for Implementation in the whole country ?
 \section{Scalability}
@@ -206,16 +318,13 @@ Where else can this system be applied ?
 
 
 \chapter{Conclusion}
-What are some key learnings throught this excersize ? That even thought algorithm is fully open source, no one can break it .
-% \begin{thebibliography}{9}
+What are some key learnings throught this excercize ? That even thought algorithm is fully open source, no one can break it .
 
+% \begin{thebibliography}{9}
 % \bibitem{ALM}
 % P. Allen, B. Landman and H. Meeks, New Bounds on van der Waerden type numbers for Generalized $3$-term Arithmetic Progressions, {\it arXiv: 1201.3842v2}
-
-
 % \bibitem{BL}
 % S. Burr and S. Loo, On Rado numbers II, unpublished.
-
 % \end{thebibliography}
 
 \end{document}  
